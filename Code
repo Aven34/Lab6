@@ -1,0 +1,36 @@
+class User:
+    def __init__(self, name, email, password):
+        self.name = name
+        self.email = email
+        self.password = password
+
+    def create_account(self):
+        
+
+class UserManager:
+    def __init__(self):
+        self.users = []
+
+    def add_user(self, user: User):
+        self.users.append(user)
+
+    def remove_user(self, user: User):
+        self.users.remove(user)
+
+    def get_user_by_email(self, email):
+        for user in self.users:
+            if user.email == email:
+                return user
+        return None
+
+class Authentication:
+    def __init__(self, user_manager: UserManager):
+        self.user_manager = user_manager
+
+    def authenticate(self, email, password):
+        user = self.user_manager.get_user_by_email(email)
+
+        if user and user.password == password:
+            print(f"User {user.name} successfully authenticated.")
+        else:
+            print("Authentication failed.")
